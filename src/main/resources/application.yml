@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: desafio-itau-vaga-99-junior
+
+springdoc:
+  swagger-ui:
+    path: /swagger
