@@ -7,10 +7,7 @@ import com.dev.desafio_itau_vaga_99_junior.services.TransacaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("transacao")
@@ -25,13 +22,15 @@ public class TransacaoController {
             this.transacaoService.adicionarTransacao(transacao);
             return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
         }
-        catch (TempoFuturoException e){
+        catch (TempoFuturoException | ValorNegativoException e){
             System.out.println(e.getMessage());
             return ResponseEntity.unprocessableEntity().build();
         }
-        catch (ValorNegativoException e){
-            System.out.println(e.getMessage());
-            return ResponseEntity.unprocessableEntity().build();
-        }
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<Void> apagarTransacoes(){
+        this.transacaoService.apagarTransacoes();
+        return ResponseEntity.ok().build();
     }
 }

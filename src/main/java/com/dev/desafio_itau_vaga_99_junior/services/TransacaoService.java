@@ -32,6 +32,21 @@ public class TransacaoService {
         }
 
         transacoes.add(transacao);
-        transacoes.forEach(System.out::println);
+        imprimirTransacoes();
+    }
+
+    public void apagarTransacoes(){
+        transacoes.clear();
+        imprimirTransacoes();
+    }
+
+    private void imprimirTransacoes(){
+        if (this.transacoes.isEmpty()){
+            System.out.println("Nao ha transacoes");
+        }
+        else{
+            transacoes.forEach(System.out::println);
+            System.out.println();
+        }
     }
 }
