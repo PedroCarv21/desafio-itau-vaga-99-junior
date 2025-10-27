@@ -16,7 +16,7 @@ public class TransacaoController {
 
     private final TransacaoService transacaoService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Void> adicionarTransacao(@RequestBody Transacao transacao){
         try {
             this.transacaoService.adicionarTransacao(transacao);
@@ -28,7 +28,7 @@ public class TransacaoController {
         }
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     public ResponseEntity<Void> apagarTransacoes(){
         this.transacaoService.apagarTransacoes();
         return ResponseEntity.ok().build();
