@@ -1,7 +1,7 @@
 package com.dev.desafio_itau_vaga_99_junior.services;
 
 import com.dev.desafio_itau_vaga_99_junior.dtos.EstatisticaResponseDTO;
-import com.dev.desafio_itau_vaga_99_junior.entities.Transacao;
+import com.dev.desafio_itau_vaga_99_junior.dtos.TransacaoRequestDTO;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.TempoFuturoException;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.ValorNegativoException;
 import com.dev.desafio_itau_vaga_99_junior.mappers.EstatisticaMapper;
@@ -23,19 +23,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TransacaoService {
 
-    private final List<Transacao> transacoes;
+    private final List<TransacaoRequestDTO> transacoes;
     private final EstatisticaMapper estatisticaMapper;
 
-    public void adicionarTransacao(Transacao transacao){
+    public void adicionarTransacao(TransacaoRequestDTO transacao){
 
         OffsetDateTime dataHoraAtual = OffsetDateTime.now();
 
-
-        if (transacao.getDataHora().isAfter(dataHoraAtual)){
+        if (transacao.dataHora().isAfter(dataHoraAtual)){
             throw new TempoFuturoException("O periodo da transacao nao pode ser futuro");
         }
 
-        if (transacao.getValor().compareTo(new BigDecimal(0)) < 0){
+        if (transacao.valor().compareTo(new BigDecimal(0)) < 0){
             throw new ValorNegativoException("A transacao nao deve ter valor negativo.");
         }
 
@@ -62,9 +61,9 @@ public class TransacaoService {
 
         OffsetDateTime tempoAtual = OffsetDateTime.now();
 
-        List<Transacao> transacoesSelecionadas = this.transacoes.stream().filter(transacaoRealizada -> {
+        List<TransacaoRequestDTO> transacoesSelecionadas = this.transacoes.stream().filter(transacaoRealizada -> {
             Duration duracao = Duration.ofSeconds(periodoTransacao);
-            Duration tempoRestante = Duration.between(transacaoRealizada.getDataHora(), tempoAtual);
+            Duration tempoRestante = Duration.between(transacaoRealizada.dataHora(), tempoAtual);
             return tempoRestante.compareTo(duracao) < 0;
         }).toList();
 
@@ -73,7 +72,7 @@ public class TransacaoService {
         }
         DoubleSummaryStatistics dss = transacoesSelecionadas.stream()
                 .collect(Collectors.summarizingDouble(t -> {
-                    BigDecimal valor = t.getValor();
+                    BigDecimal valor = t.valor();
                     return valor.doubleValue();
                 }));
         return this.estatisticaMapper.toDTO(dss);

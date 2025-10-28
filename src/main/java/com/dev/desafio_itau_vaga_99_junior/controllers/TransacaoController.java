@@ -1,6 +1,6 @@
 package com.dev.desafio_itau_vaga_99_junior.controllers;
 
-import com.dev.desafio_itau_vaga_99_junior.entities.Transacao;
+import com.dev.desafio_itau_vaga_99_junior.dtos.TransacaoRequestDTO;
 import com.dev.desafio_itau_vaga_99_junior.services.TransacaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
@@ -15,8 +15,8 @@ public class TransacaoController {
     private final TransacaoService transacaoService;
 
     @PostMapping
-    public ResponseEntity<Void> adicionarTransacao(@RequestBody Transacao transacao){
-        this.transacaoService.adicionarTransacao(transacao);
+    public ResponseEntity<Void> adicionarTransacao(@RequestBody TransacaoRequestDTO transacaoRequestDTO){
+        this.transacaoService.adicionarTransacao(transacaoRequestDTO);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
