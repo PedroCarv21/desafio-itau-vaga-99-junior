@@ -1,8 +1,6 @@
 package com.dev.desafio_itau_vaga_99_junior.controllers;
 
 import com.dev.desafio_itau_vaga_99_junior.entities.Transacao;
-import com.dev.desafio_itau_vaga_99_junior.exceptions.TempoFuturoException;
-import com.dev.desafio_itau_vaga_99_junior.exceptions.ValorNegativoException;
 import com.dev.desafio_itau_vaga_99_junior.services.TransacaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
@@ -18,14 +16,8 @@ public class TransacaoController {
 
     @PostMapping
     public ResponseEntity<Void> adicionarTransacao(@RequestBody Transacao transacao){
-        try {
-            this.transacaoService.adicionarTransacao(transacao);
-            return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
-        }
-        catch (TempoFuturoException | ValorNegativoException e){
-            System.out.println(e.getMessage());
-            return ResponseEntity.unprocessableEntity().build();
-        }
+        this.transacaoService.adicionarTransacao(transacao);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
     @DeleteMapping

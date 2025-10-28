@@ -30,6 +30,7 @@ public class TransacaoService {
 
         OffsetDateTime dataHoraAtual = OffsetDateTime.now();
 
+
         if (transacao.getDataHora().isAfter(dataHoraAtual)){
             throw new TempoFuturoException("O periodo da transacao nao pode ser futuro");
         }

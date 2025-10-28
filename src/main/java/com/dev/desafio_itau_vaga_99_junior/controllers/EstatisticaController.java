@@ -19,7 +19,7 @@ public class EstatisticaController {
     private final TransacaoService transacaoService;
 
     @GetMapping
-    public ResponseEntity<EstatisticaResponseDTO> calcularEstatistica(@RequestParam("periodo_transacao") Long periodoTransacao){
+    public ResponseEntity<EstatisticaResponseDTO> calcularEstatistica(@RequestParam( value = "periodo_transacao", defaultValue = "60") Long periodoTransacao){
         EstatisticaResponseDTO estatisticaResponseDTO = this.transacaoService.calcularEstatisticas(periodoTransacao);
         return ResponseEntity.ok().body(estatisticaResponseDTO);
     }
