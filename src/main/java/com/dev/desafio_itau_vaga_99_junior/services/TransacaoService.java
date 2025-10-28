@@ -5,9 +5,7 @@ import com.dev.desafio_itau_vaga_99_junior.dtos.TransacaoRequestDTO;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.TempoFuturoException;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.ValorNegativoException;
 import com.dev.desafio_itau_vaga_99_junior.mappers.EstatisticaMapper;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,8 +16,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Getter
-@Setter
 @RequiredArgsConstructor
 public class TransacaoService {
 
