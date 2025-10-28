@@ -18,11 +18,11 @@ public class TransacaoController {
 
     @PostMapping
     @Operation(
-            description = "Armazena uma transacao (que contem os dados do valor e do tempo da transacao) dentro de uma lista de transacoes (em memoria).",
+            description = "Armazena uma transação (que contém os dados do valor e do tempo da transação) dentro de uma lista de transações (em memória).",
             responses = {
-                    @ApiResponse(responseCode = "201", description = "A transacao foi inserida na lista com sucesso."),
-                    @ApiResponse(responseCode = "422", description = "Foi passado um numero negativo para o campo valor ou uma data futura para o campo dataHora."),
-                    @ApiResponse(responseCode = "400", description = "Houve algum erro de requisicao no lado do cliente."),
+                    @ApiResponse(responseCode = "201", description = "A transação foi inserida na lista com sucesso."),
+                    @ApiResponse(responseCode = "400", description = "Houve algum erro de requisição no lado do cliente."),
+                    @ApiResponse(responseCode = "422", description = "Foi passado um número negativo para o campo valor ou uma data futura para o campo dataHora."),
                     @ApiResponse(responseCode = "500", description = "Houve algum problema no lado do servidor.")
             }
     )
@@ -33,9 +33,11 @@ public class TransacaoController {
 
     @DeleteMapping
     @Operation(
-            description = "Utilizado para excluir todas as transacoes armazenadas na lista.",
+            description = "Utilizado para excluir todas as transações armazenadas na lista.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Todas as transacoes foram apagadas da lista com sucesso."),
+                    @ApiResponse(responseCode = "200", description = "Todas as transações foram apagadas da lista com sucesso."),
+                    @ApiResponse(responseCode = "400", description = "Houve algum erro de requisição no lado do cliente."),
+                    @ApiResponse(responseCode = "422", description = "Houve algum problema semântico nos dados."),
                     @ApiResponse(responseCode = "500", description = "Houve algum problema no servidor.")
             }
     )

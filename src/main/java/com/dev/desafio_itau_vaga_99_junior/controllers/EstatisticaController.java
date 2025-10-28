@@ -21,13 +21,14 @@ public class EstatisticaController {
     @GetMapping
     @Operation(
             description = """
-                    Retorna a soma, o minimo, a media, a soma e a quantidade de transacoes que ocorreu
-                    nos ultimos X segundos (esse X sendo definido pelo usuario). Se nao houver nenhuma
-                    transacao que ocorreu neste intervalo de tempo, todos os campos retornarao com o valor 0.
+                    Retorna a soma, o mínimo, a média, o máximo e a quantidade de transações que ocorreram
+                    nos últimos X segundos (esse X sendo definido pelo usuário). Se não houver nenhuma
+                    transação que ocorreu neste intervalo de tempo, todos os campos retornarão com o valor 0.
                     """,
             responses = {
-                    @ApiResponse(responseCode = "200", description = "O calculo das transacoes foi retornado sucesso."),
-                    @ApiResponse(responseCode = "422", description = "Nao foi passado um numero inteiro"),
+                    @ApiResponse(responseCode = "200", description = "O cálculo das transações retornou com sucesso."),
+                    @ApiResponse(responseCode = "400", description = "Houve algum erro de requisição no lado do cliente."),
+                    @ApiResponse(responseCode = "422", description = "Não foi passado um número inteiro"),
                     @ApiResponse(responseCode = "500", description = "Houve algum problema no servidor.")
             }
     )
