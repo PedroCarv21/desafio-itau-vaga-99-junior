@@ -5,3 +5,13 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger
+  show-actuator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health"
+  endpoint:
+    health:
+      show-details: always
