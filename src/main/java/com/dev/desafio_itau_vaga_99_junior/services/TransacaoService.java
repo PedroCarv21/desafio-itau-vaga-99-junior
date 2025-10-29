@@ -65,12 +65,19 @@ public class TransacaoService {
             log.info("Nenhuma transação foi selecionada e, portanto, todos os valores estatísticos serão zero.");
             return new EstatisticaResponseDTO(0L,0.0,0.0,0.0, 0.0);
         }
+
         log.info("Preparando cálculos para a estatística e retornando os valores de soma, mínimo, média, máximo e quantidade de transações.");
+        OffsetDateTime inicioCalculo = OffsetDateTime.now();
         DoubleSummaryStatistics dss = transacoesSelecionadas.stream()
                 .collect(Collectors.summarizingDouble(t -> {
                     BigDecimal valor = t.valor();
                     return valor.doubleValue();
                 }));
+
+        OffsetDateTime fimCalculo = OffsetDateTime.now();
+
+        Long tempoCalculo = Duration.between(inicioCalculo, fimCalculo).toMillis();
+        System.out.printf("Tempo do cálculo das estatísticas (milissegundos): %d", tempoCalculo);
         return this.estatisticaMapper.toDTO(dss);
     }
 }
