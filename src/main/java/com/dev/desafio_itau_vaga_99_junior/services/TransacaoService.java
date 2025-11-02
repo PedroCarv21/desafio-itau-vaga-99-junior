@@ -5,6 +5,7 @@ import com.dev.desafio_itau_vaga_99_junior.dtos.TransacaoRequestDTO;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.TempoFuturoException;
 import com.dev.desafio_itau_vaga_99_junior.exceptions.ValorNegativoException;
 import com.dev.desafio_itau_vaga_99_junior.mappers.EstatisticaMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Getter
 public class TransacaoService {
 
     private final List<TransacaoRequestDTO> transacoes;
