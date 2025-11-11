@@ -115,6 +115,7 @@
 			</plugin>
 
 		</plugins>
+		<finalName>DockerApp</finalName>
 	</build>
 
 </project>
